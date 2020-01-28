@@ -18,12 +18,26 @@ public class WormController : MonoBehaviour
 
         }
 
-    if (text == "UwU")
+    if (text == "help")
     {
-        Debug.Log("UwU means 'I love You' in Dinosaur.");
+        Debug.Log("I will not help you, sorry.");
     }
+
+    if (x<10)
+{
+  Debug.Log("x is smaller than 10, how bad."); 
+}
+else
+{
+    Debug.Log("x is 10 or over 10, how amazing!"); 
+}
         
     }
+
+
+
+
+
 
 
 
