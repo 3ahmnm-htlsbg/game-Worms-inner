@@ -3,45 +3,49 @@
 public class WormController : MonoBehaviour
 {
  
-
-   void Update()
-    {
-        
-        if (Input.GetKeyDown(KeyCode.LeftArrow)){
-
-           // Worm(transform.position);
-        }
-        
-        if (Input.GetKeyDown("space")){
-        
-            print("space key was pressed");
-        }
-  
-         if (Input.GetKeyDown(KeyCode.Space))
-        {
-            // Instantiate the projectile at the position and rotation of this transform
-            Rigidbody clone;
-            clone = Instantiate(projectile, transform.position, transform.rotation);
-
-            // Give the cloned object an initial velocity along the current
-            // object's Z axis
-            clone.velocity = transform.TransformDirection(Vector3.forward * 10);
-        }
-    void Start() {
-        rb = GetComponent<Rigidbody>();
-    }
-    Start();
-
-    void FixedUpdate(){
-        rb.AddForce(transform.forward * thrust);
-    }
-    FixedUpdate();
-}
-    public float thrust = 1.0f;
+    public float thrust = 20.0f;
     public Rigidbody rb;
     public Rigidbody projectile;
 
+   void Update()
+    {
+
+        
+        if (Input.GetKey(KeyCode.D)){
+
+            Vector3 direction = new Vector3(1,0,0);
+            rb.AddForce(direction * thrust);
+        }
+
+        
+        if (Input.GetKey(KeyCode.A)){
+        
+             Vector3 direction = new Vector3(-1,0,0);
+            rb.AddForce(direction * thrust);
+        }
+
+         if (Input.GetKey(KeyCode.W)){
+        
+             Vector3 direction = new Vector3(0,1,0);
+            rb.AddForce(direction * thrust);
+        }
+  
+
+   
+
+    
+    
+       
+    
+   
 }
+    
+
+     
+}
+
+
+
 
 
 
