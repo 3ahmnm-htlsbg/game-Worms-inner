@@ -4,6 +4,7 @@ public class WormController : MonoBehaviour
 {
  
     public float thrust = 20.0f;
+    public float jump = 400.0f;
     public Rigidbody rb;
     public Rigidbody projectile;
 
@@ -24,10 +25,10 @@ public class WormController : MonoBehaviour
             rb.AddForce(direction * thrust);
         }
 
-         if (Input.GetKey(KeyCode.W)){
+         if (Input.GetKeyDown(KeyCode.W)){
         
              Vector3 direction = new Vector3(0,1,0);
-            rb.AddForce(direction * thrust);
+            rb.AddForce(direction * jump);
         }
   
 

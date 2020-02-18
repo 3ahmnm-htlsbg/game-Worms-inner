@@ -246,6 +246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thrust: 20
+  jump: 200
   rb: {fileID: 316204371}
   projectile: {fileID: 887557160694336180, guid: 0b4ac5ac0c1284983b143d2af1a9e1cc,
     type: 3}
