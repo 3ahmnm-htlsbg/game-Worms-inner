@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WormController : MonoBehaviour
+public class UlitmateScript : MonoBehaviour
 {
 public Rigidbody rb;
 public KeyCode jump;
@@ -29,12 +29,12 @@ public GameObject spawnPos;
 
         if (Input.GetKey(left))
         {
-           rb.AddForce(-moveForce); 
+           rb.AddForce(moveForce); 
         }
 
         if (Input.GetKey(right))
         {
-           rb.AddForce(moveForce);
+           rb.AddForce(-moveForce);
         }
 
         if (Input.GetKeyDown(shoot))
@@ -54,19 +54,19 @@ public GameObject spawnPos;
 
         if (Input.GetKey(left))
         {
-             rb.AddForce(-moveForce);
+             rb.AddForce(moveForce);
         }
 
         if (Input.GetKey(right))
         {
-             rb.AddForce(moveForce);
+             rb.AddForce(-moveForce);
         }
 
-        //if (Input.GetKeyDown(shoot))
+        if (Input.GetKeyDown(shoot))
         {
-          //  GameObject clone = Instantiate (projectile,spawnPos.transform.position,Quaternion.identity); 
-         // Rigidbody rigid = clone.GetComponent<Rigidbody>();
-         // rigid.AddForce(-shootSpeed);
+            GameObject clone = Instantiate (projectile,spawnPos.transform.position,Quaternion.identity); 
+          Rigidbody rigid = clone.GetComponent<Rigidbody>();
+          rigid.AddForce(shootSpeed);
         }
 
 
@@ -81,15 +81,3 @@ public GameObject spawnPos;
     }
 
 }
-
-     
-
-
-
-
-
-
-
-
-
-
