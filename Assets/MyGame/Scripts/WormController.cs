@@ -1,123 +1,86 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class WormController : MonoBehaviour
 {
- 
-    public float thrust = 20.0f;
-    public float jump = 400.0f;
-    public float shoot = 100.0f;
-    public float shootRight = -100.0f;
+public Rigidbody rb;
+public KeyCode jump;
+public KeyCode left;
+public KeyCode right;
+public KeyCode shoot;
+public Vector3 jumpForce;
+public Vector3 moveForce;
+public Vector3 shootSpeed;
+public GameObject projectile;
+public GameObject spawnPos;
 
-    public Rigidbody rbLeft;
-    public Rigidbody rbRight;
 
-    public Rigidbody ProjectilesLeft;
-    public Rigidbody ProjectilesRight;
 
-    public GameObject GunLeft;
-    public GameObject GunRight;
 
-    public Transform ProjectilesPositionL;
-    public Transform ProjectilesPositionR;
 
-    public GameObject SphereL;
-    public GameObject SphereR;
 
-   private void Update()
+    void Update()
     {
-
-      //Left
-
-        if (Input.GetKey(KeyCode.D)){
-
-            Vector3 direction = new Vector3(1,0,0);
-            rbLeft.AddForce(direction * thrust);
-        }
-
-        
-        if (Input.GetKey(KeyCode.A)){
-        
-             Vector3 direction = new Vector3(-1,0,0);
-            rbLeft.AddForce(direction * thrust);
-        }
-
-         if (Input.GetKeyDown(KeyCode.W)){
-        
-             Vector3 direction = new Vector3(0,1,0);
-            rbLeft.AddForce(direction * jump);
-        }
-
-      if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(jump))
         {
-            
-        }
-         if (Input.GetKeyDown(KeyCode.Q))
-            {
-                Debug.Log("Q is to rotate left");
-                GunLeft.transform.Rotate(0, 0, -10, Space.Self);
-            }
-
-        
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                Debug.Log("E is to rotate right");
-                GunLeft.transform.Rotate(0, 0, 10, Space.Self);
-            }
-
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-             GameObject ProjectilesLeft = Instantiate(SphereL, ProjectilesPositionL.position, Quaternion.identity);
-             ProjectilesLeft.GetComponent<Rigidbody>().AddForce(GunLeft.transform.up * shoot);
-            }
-
-            
-             //Right
-        
-        if (Input.GetKey(KeyCode.RightArrow)){
-
-            Vector3 direction = new Vector3(1,0,0);
-            rbRight.AddForce(direction * thrust);
+            rb.AddForce(jumpForce);
         }
 
-        
-        if (Input.GetKey(KeyCode.LeftArrow)){
-        
-             Vector3 direction = new Vector3(-1,0,0);
-            rbRight.AddForce(direction * thrust);
-        }
-
-         if (Input.GetKeyDown(KeyCode.UpArrow)){
-        
-             Vector3 direction = new Vector3(0,1,0);
-            rbRight.AddForce(direction * jump);
-        }
-
-      if (Input.GetKeyDown(KeyCode.L))
+        if (Input.GetKey(left))
         {
-            GameObject ProjectilesRight = Instantiate(SphereR, ProjectilesPositionR.position, Quaternion.identity);
-             ProjectilesRight.GetComponent<Rigidbody>().AddForce(GunRight.transform.up * shootRight);
+           rb.AddForce(moveForce); 
         }
-         if (Input.GetKeyDown(KeyCode.O))
-            {
-               
-                GunRight.transform.Rotate(0, 0, -10, Space.Self);
-            }
+
+        if (Input.GetKey(right))
+        {
+           rb.AddForce(-moveForce);
+        }
+
+        if (Input.GetKeyDown(shoot))
+        {
+            //for cloning
+          GameObject clone = Instantiate (projectile,spawnPos.transform.position,Quaternion.identity); 
+          Rigidbody rigid = clone.GetComponent<Rigidbody>();
+          rigid.AddForce(shootSpeed);
+        }   
+     //Right Worm
+
+
+       if (Input.GetKeyDown(jump))
+        {
+        rb.AddForce(jumpForce);
+        }
+
+        if (Input.GetKey(left))
+        {
+             rb.AddForce(moveForce);
+        }
+
+        if (Input.GetKey(right))
+        {
+             rb.AddForce(-moveForce);
+        }
+
+        if (Input.GetKeyDown(shoot))
+        {
+            GameObject clone = Instantiate (projectile,spawnPos.transform.position,Quaternion.identity); 
+          Rigidbody rigid = clone.GetComponent<Rigidbody>();
+          rigid.AddForce(shootSpeed);
+        }
+
 
         
-            if (Input.GetKeyDown(KeyCode.P))
-            {
-          
-                GunRight.transform.Rotate(0, 0, 10, Space.Self);
-            }
+
+
+
+
+
+
+
     }
- 
-        
-   
-       // DisplayHealth();
+
 }
-    
 
      
 
