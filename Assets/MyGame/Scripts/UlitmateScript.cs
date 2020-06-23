@@ -1,6 +1,11 @@
-﻿using System.Collections;
+﻿
+using System.Reflection;
+using System.Net.Mime;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UlitmateScript : MonoBehaviour
 {
@@ -14,10 +19,16 @@ public Vector3 moveForce;
 public Vector3 shootSpeed;
 public GameObject projectile;
 public GameObject spawnPos;
+public Text HealthText;
+public int health;
 
 
 
 
+ void Start()
+    {
+        HealthText.text = health.ToString();
+    }
 
 
     void Update()
@@ -44,6 +55,7 @@ public GameObject spawnPos;
           Rigidbody rigid = clone.GetComponent<Rigidbody>();
           rigid.AddForce(shootSpeed);
         }   
+    
      //Right Worm
 
 
@@ -62,19 +74,33 @@ public GameObject spawnPos;
              rb.AddForce(-moveForce);
         }
 
-        if (Input.GetKeyDown(shoot))
+
+
+         void OnCollisionEnter(Collision collision)
+    {
+
+        if (collision.gameObject.tag == "projectile")
         {
-            GameObject clone = Instantiate (projectile,spawnPos.transform.position,Quaternion.identity); 
-          Rigidbody rigid = clone.GetComponent<Rigidbody>();
-          rigid.AddForce(shootSpeed);
+            health = health - 1;
+            Debug.Log("collision with Projectile");
+            HealthText.text = health.ToString();
         }
-
-
+        else if (collision.gameObject.tag == "HealthPack")
+        {
+            health = health + 2;
+            Debug.Log("Healthpack");
+            HealthText.text = health.ToString();
+            Destroy(collision.gameObject);
+        }
         
+        else
+        {
+            Debug.Log("no collision with anything");
+            HealthText.text = health.ToString();
+        }
+    }
 
-
-
-
+OnCollisionEnter();
 
 
 
